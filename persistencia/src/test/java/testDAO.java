@@ -1,8 +1,8 @@
-import mx.desarrollo.persistence.dao.AlumnoDAO;
 import mx.desarrollo.persistence.persistence.HibernateUtil;
-import mx.desarrollo.entity.Alumno;
 import jakarta.persistence.EntityManager;
 import java.util.List;
+
+import mx.desarrollo.entity.Profesor;
 
 public class testDAO {
     public static void main(String[] args) {
@@ -10,12 +10,10 @@ public class testDAO {
             EntityManager em = HibernateUtil.getEntityManager();
             System.out.println("Conexion establecida a la base de datos");
 
-            AlumnoDAO alumnoDAO = new AlumnoDAO(em);
+            List<Profesor> profesores = em.createQuery("SELECT p FROM Profesor p", Profesor.class).getResultList();
 
-            List<Alumno> alumnos = em.createQuery("SELECT a FROM Alumno a", Alumno.class).getResultList();
-
-            for (Alumno alumno : alumnos) {
-                System.out.println(alumno.getNombre() + " || id [" + alumno.getId() + "]");
+            for (Profesor profesor : profesores) {
+                System.out.println(profesor.getNombre() + " " + profesor.getApellidoPaterno() + " | ID: " + profesor.getId());
             }
 
             System.out.println("Prueba finalizada");

@@ -1,45 +1,36 @@
 package mx.desarrollo.persistence.integration;
 
 import jakarta.persistence.EntityManager;
-import mx.desarrollo.persistence.dao.AlumnoDAO;
 import mx.desarrollo.persistence.dao.UsuarioDAO;
+import mx.desarrollo.persistence.dao.ProfesorDAO;
+import mx.desarrollo.persistence.dao.UnidadAprendizajeDAO;
+import mx.desarrollo.persistence.dao.AsignacionDAO;
 import mx.desarrollo.persistence.persistence.HibernateUtil;
 
-
-/**
- *
- * @author total
- */
 public class ServiceLocator {
 
-    private static AlumnoDAO alumnoDAO;
-    private static UsuarioDAO usuarioDAO;
+    private static EntityManager entityManager;
 
-    private static EntityManager getEntityManager(){
-        return HibernateUtil.getEntityManager();
-    }
-
-    /**
-     * se crea la instancia para alumno DAO si esta no existe
-     */
-    public static AlumnoDAO getInstanceAlumnoDAO(){
-        if(alumnoDAO == null){
-            alumnoDAO = new AlumnoDAO(getEntityManager());
-            return alumnoDAO;
-        } else{
-            return alumnoDAO;
+    private static synchronized EntityManager getEntityManager(){
+        if (entityManager == null || !entityManager.isOpen()) {
+            entityManager = HibernateUtil.getEntityManager();
         }
+        return entityManager;
     }
-    /**
-     * se crea la instancia de usuarioDAO si esta no existe
-     */
+
     public static UsuarioDAO getInstanceUsuarioDAO(){
-        if(usuarioDAO == null){
-            usuarioDAO = new UsuarioDAO(getEntityManager());
-            return usuarioDAO;
-        } else{
-            return usuarioDAO;
-        }
+        return new UsuarioDAO(getEntityManager());
     }
-    
+
+    public static ProfesorDAO getInstanceProfesorDAO(){
+        return new ProfesorDAO(getEntityManager());
+    }
+
+    public static UnidadAprendizajeDAO getInstanceUnidadAprendizajeDAO(){
+        return new UnidadAprendizajeDAO(getEntityManager());
+    }
+
+    public static AsignacionDAO getInstanceAsignacionDAO(){
+        return new AsignacionDAO(getEntityManager());
+    }
 }
