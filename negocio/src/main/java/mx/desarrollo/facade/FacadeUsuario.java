@@ -2,22 +2,19 @@ package mx.desarrollo.facade;
 
 import mx.desarrollo.delegate.DelegateUsuario;
 import mx.desarrollo.entity.Usuario;
-import mx.desarrollo.persistence.integration.ServiceLocator;
 
 public class FacadeUsuario {
-
     private final DelegateUsuario delegateUsuario;
 
     public FacadeUsuario() {
         this.delegateUsuario = new DelegateUsuario();
     }
 
-    public Usuario login(String password, String correo){
-        return delegateUsuario.login(password, correo);
+    public Usuario login(String password, String username){
+        return delegateUsuario.login(password, username);
     }
 
-    public void saveUsario(Usuario usuario){
-        delegateUsuario.saveUsario(usuario);
+    public void saveUsuario(Usuario usuario){
+        delegateUsuario.saveUsuario(usuario);
     }
-
 }
