@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<f:metadata>
+    <f:viewAction action="#{profesorUI.cargarDatos()}" />
+</f:metadata>
+
+<h:head>
+    <title>Consulta General de Asignaciones</title>
+    <style>
+        body { background-color: #131314; color: #ffffff; font-family: 'Segoe UI', sans-serif; margin: 20px; }
+
+        .ui-menubar { background: transparent !important; border: none !important; padding: 0 0 20px 0 !important; display: flex !important; justify-content: center; }
+        .ui-menuitem { margin: 0 8px !important; }
+        .ui-menuitem-link { background: #1e1e1e !important; border: 1px solid #444 !important; border-radius: 25px !important; padding: 8px 16px !important; color: #e3e3e3 !important; transition: all 0.3s ease !important; }
+        .ui-menuitem-link:hover { border-color: #007738 !important; background: rgba(0, 119, 56, 0.1) !important; color: #ffffff !important; }
+
+        .ui-panel { background: #1e1e1e !important; border: 1px solid #333 !important; border-radius: 8px !important; box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important; }
+        .ui-panel-titlebar { background: transparent !important; border: none !important; border-bottom: 1px solid #333 !important; color: #007738 !important; font-size: 1.2em; }
+        .ui-panel-content { background: transparent !important; color: #e3e3e3 !important; }
+
+        /* Estilo para las Tablas de PrimeFaces en Modo Oscuro */
+        .ui-datatable { margin-top: 15px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important; }
+        .ui-datatable th { background: #2b2b2b !important; color: #007738 !important; border: 1px solid #333 !important; text-align: center !important; }
+        .ui-datatable td { background: #1e1e1e !important; color: #e3e3e3 !important; border: 1px solid #333 !important; text-align: center !important; }
+        .ui-datatable .ui-datatable-odd td { background: #252526 !important; }
+    </style>
+</h:head>
+<h:body>
+    <h:form id="formConsulta">
+        <p:menubar>
+            <p:menuitem value="Volver al Menu" url="menu.xhtml?faces-redirect=true" icon="pi pi-home" />
+        </p:menubar>
+
+        <p:panel header="Asignaciones por Profesor">
+            <p:dataTable value="#{profesorUI.listaProfesores}" var="prof">
+                <p:column headerText="Profesor">
+                    <h:outputText value="#{prof.nombre} #{prof.apellidoPaterno} #{prof.apellidoMaterno}"/>
+                </p:column>
+                <p:column headerText="Materias Asignadas">
+                    <p:dataTable value="#{prof.asignaciones}" var="asig" emptyMessage="Sin asignaciones">
+                        <p:column headerText="Unidad">
+                            <h:outputText value="#{asig.unidadAprendizaje.nombreUnidad}"/>
+                        </p:column>
+                        <p:column headerText="Horario">
+                            <h:outputText value="#{asig.diaSemana} de #{asig.horaInicio} a #{asig.horaFin}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

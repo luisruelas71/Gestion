@@ -50,7 +50,7 @@
     </repositories>
 
     <dependencies>
-        <!-- Jakarta EE API -->
+
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-web-api</artifactId>
@@ -58,7 +58,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- PrimeFaces 14 -->
+
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
@@ -66,7 +66,7 @@
             <classifier>jakarta</classifier>
         </dependency>
 
-        <!-- PrimeFaces Extensions 14 -->
+
         <dependency>
             <groupId>org.primefaces.extensions</groupId>
             <artifactId>primefaces-extensions</artifactId>
@@ -86,8 +86,6 @@
             <scope>test</scope>
         </dependency>
 
-
-        <!-- Weld para CDI -->
         <dependency>
             <groupId>org.jboss.weld.servlet</groupId>
             <artifactId>weld-servlet-shaded</artifactId>

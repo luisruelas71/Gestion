@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Menu Principal SAUAP</title>
+    <style>
+        body { background-color: #131314; color: #ffffff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
+        .nav-container { margin-top: 40px; display: flex; justify-content: center; }
+        .ui-menubar { background: transparent !important; border: none !important; padding: 0 !important; display: flex !important; justify-content: center; }
+        .ui-menuitem { margin: 0 8px !important; }
+        .ui-menuitem-link { background: #1e1e1e !important; border: 1px solid #444 !important; border-radius: 25px !important; padding: 10px 20px !important; color: #e3e3e3 !important; transition: all 0.3s ease !important; }
+        .ui-menuitem-link:hover { border-color: #007738 !important; background: rgba(0, 119, 56, 0.1) !important; color: #ffffff !important; box-shadow: 0 0 10px rgba(0, 119, 56, 0.2); }
+        .btn-salir .ui-menuitem-link:hover { border-color: #d32f2f !important; background: rgba(211, 47, 47, 0.1) !important; color: #ffffff !important; box-shadow: 0 0 10px rgba(211, 47, 47, 0.2); }
+        .bienvenida { text-align: center; margin: 80px auto; max-width: 650px; background: #1e1e1e; padding: 50px; border-radius: 12px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); border-top: 4px solid #007738; }
+        .bienvenida h1 { margin-top: 0; font-size: 2.2em; font-weight: 600; color: #ffffff; }
+        .bienvenida p { color: #aaaaaa; font-size: 1.1em; line-height: 1.5; margin-bottom: 0; }
+    </style>
+</h:head>
+<h:body>
+    <div class="nav-container">
+        <h:form>
+            <p:menubar>
+                <p:menuitem value="Profesores" url="profesores.xhtml" icon="pi pi-users" />
+                <p:menuitem value="Unidades de Aprendizaje" url="unidades.xhtml" icon="pi pi-book" />
+                <p:menuitem value="Asignaciones" url="asignaciones.xhtml" icon="pi pi-calendar-plus" />
+                <p:menuitem value="Consultas" url="consultas.xhtml" icon="pi pi-search" />
+                <p:menuitem value="Salir" url="login.xhtml" icon="pi pi-sign-out" styleClass="btn-salir" />
+            </p:menubar>
+        </h:form>
+    </div>
+    <div class="bienvenida">
+        <h1>Bienvenido al Sistema SAUAP</h1>
+        <p>Sistema de Asignacion de Unidades de Aprendizaje a los Profesores.</p>
+    </div>
+</h:body>
+</html>

@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Asignaciones</title>
+    <style>
+        body { background-color: #131314; color: #ffffff; font-family: 'Segoe UI', sans-serif; margin: 20px; }
+        .ui-menubar { background: transparent !important; border: none !important; padding: 0 0 20px 0 !important; display: flex !important; justify-content: center; }
+        .ui-menuitem { margin: 0 8px !important; }
+        .ui-menuitem-link { background: #1e1e1e !important; border: 1px solid #444 !important; border-radius: 25px !important; padding: 8px 16px !important; color: #e3e3e3 !important; transition: all 0.3s ease !important; }
+        .ui-menuitem-link:hover { border-color: #007738 !important; background: rgba(0, 119, 56, 0.1) !important; color: #ffffff !important; box-shadow: 0 0 10px rgba(0, 119, 56, 0.2); }
+        .ui-panel { background: #1e1e1e !important; border: 1px solid #333 !important; border-radius: 8px !important; box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important; }
+        .ui-panel-titlebar { background: transparent !important; border: none !important; border-bottom: 1px solid #333 !important; color: #007738 !important; font-size: 1.2em; }
+        .ui-panel-content { background: transparent !important; color: #e3e3e3 !important; }
+        .ui-outputlabel { color: #aaaaaa !important; }
+        .ui-inputfield, .ui-selectonemenu { background: #2b2b2b !important; color: #fff !important; border: 1px solid #444 !important; }
+        .ui-inputfield:focus, .ui-selectonemenu.ui-state-focus { border-color: #007738 !important; background: #333 !important; }
+        .ui-selectonemenu-panel { background: #2b2b2b !important; color: #fff !important; border: 1px solid #444 !important; }
+        .ui-selectonemenu-item:hover { background: #007738 !important; color: #fff !important; }
+        .ui-button { background: #007738 !important; border: 1px solid #005528 !important; color: #fff !important; text-shadow: none !important; }
+        .ui-button:hover { background: #005528 !important; }
+    </style>
+</h:head>
+<h:body>
+    <h:form id="formAsignacion">
+        <p:menubar>
+            <p:menuitem value="Volver al Menu" url="menu.xhtml?faces-redirect=true" icon="pi pi-home" />
+        </p:menubar>
+        <p:growl id="mensajes" showDetail="true" />
+
+        <p:panel header="Asignar Unidad a Profesor">
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:outputLabel value="Profesor:" />
+                <p:selectOneMenu value="#{asignacionUI.idProfesorSeleccionado}" required="true">
+                    <f:selectItem itemLabel="Seleccione uno" itemValue="" />
+                    <f:selectItems value="#{asignacionUI.listaProfesores}" var="p" itemLabel="#{p.nombre} #{p.apellidoPaterno}" itemValue="#{p.id}" />
+                </p:selectOneMenu>
+
+                <p:outputLabel value="Unidad de Aprendizaje:" />
+                <p:selectOneMenu value="#{asignacionUI.idUnidadSeleccionada}" required="true">
+                    <f:selectItem itemLabel="Seleccione una" itemValue="" />
+                    <f:selectItems value="#{asignacionUI.listaUnidades}" var="u" itemLabel="#{u.nombreUnidad}" itemValue="#{u.id}" />
+                </p:selectOneMenu>
+
+                <p:outputLabel value="Dia de la Semana:" />
+                <p:selectOneMenu value="#{asignacionUI.asignacion.diaSemana}" required="true">
+                    <f:selectItem itemLabel="Lunes" itemValue="Lunes" />
+                    <f:selectItem itemLabel="Martes" itemValue="Martes" />
+                    <f:selectItem itemLabel="Miercoles" itemValue="Miercoles" />
+                    <f:selectItem itemLabel="Jueves" itemValue="Jueves" />
+                    <f:selectItem itemLabel="Viernes" itemValue="Viernes" />
+                    <f:selectItem itemLabel="Sabado" itemValue="Sabado" />
+                </p:selectOneMenu>
+
+                <p:outputLabel value="Hora Inicio (HH:mm):" />
+                <p:inputMask value="#{asignacionUI.horaInicioStr}" mask="99:99" required="true" placeholder="08:00"/>
+
+                <p:outputLabel value="Hora Fin (HH:mm):" />
+                <p:inputMask value="#{asignacionUI.horaFinStr}" mask="99:99" required="true" placeholder="14:00"/>
+            </h:panelGrid>
+            <p:commandButton value="Asignar" actionListener="#{asignacionUI.guardar()}"  update="formAsignacion :formTabla:tablaProfesores" />
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

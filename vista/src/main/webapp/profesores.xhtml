@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Gestion de Profesores</title>
+    <style>
+        body { background-color: #131314; color: #ffffff; font-family: 'Segoe UI', sans-serif; margin: 20px; }
+
+        .ui-menubar { background: transparent !important; border: none !important; padding: 0 0 20px 0 !important; display: flex !important; justify-content: center; }
+        .ui-menuitem { margin: 0 8px !important; }
+        .ui-menuitem-link { background: #1e1e1e !important; border: 1px solid #444 !important; border-radius: 25px !important; padding: 8px 16px !important; color: #e3e3e3 !important; transition: all 0.3s ease !important; }
+        .ui-menuitem-link:hover { border-color: #007738 !important; background: rgba(0, 119, 56, 0.1) !important; color: #ffffff !important; }
+
+        .ui-panel { background: #1e1e1e !important; border: 1px solid #333 !important; border-radius: 8px !important; }
+        .ui-panel-titlebar { background: transparent !important; border: none !important; border-bottom: 1px solid #333 !important; color: #007738 !important; }
+        .ui-panel-content { background: transparent !important; color: #e3e3e3 !important; }
+
+        .ui-outputlabel { color: #aaaaaa !important; }
+        .ui-inputfield { background: #2b2b2b !important; color: #fff !important; border: 1px solid #444 !important; }
+        .ui-inputfield:focus { border-color: #007738 !important; background: #333 !important; }
+        .ui-button { background: #007738 !important; border: 1px solid #005528 !important; color: #fff !important; text-shadow: none !important; }
+        .ui-button:hover { background: #005528 !important; }
+
+        .ui-datatable { border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important; }
+        .ui-datatable th { background: #2b2b2b !important; color: #007738 !important; border: 1px solid #333 !important; text-align: center !important; }
+        .ui-datatable td { background: #1e1e1e !important; color: #e3e3e3 !important; border: 1px solid #333 !important; text-align: center !important; }
+        .ui-datatable .ui-datatable-odd td { background: #252526 !important; }
+    </style>
+</h:head>
+<h:body>
+    <h:form id="formProfesor">
+        <p:menubar>
+            <p:menuitem value="Volver al Menu" url="menu.xhtml" icon="pi pi-home" />
+        </p:menubar>
+        <p:growl id="mensajes" showDetail="true" />
+
+        <p:panel header="Registro de Profesor">
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:outputLabel value="Nombre:" />
+                <p:inputText value="#{profesorUI.profesor.nombre}" required="true"/>
+
+                <p:outputLabel value="Apellido Paterno:" />
+                <p:inputText value="#{profesorUI.profesor.apellidoPaterno}" required="true"/>
+
+                <p:outputLabel value="Apellido Materno:" />
+                <p:inputText value="#{profesorUI.profesor.apellidoMaterno}" required="true"/>
+
+                <p:outputLabel value="RFC:" />
+                <p:inputText value="#{profesorUI.profesor.rfc}" required="true"/>
+            </h:panelGrid>
+            <p:commandButton value="Guardar" actionListener="#{profesorUI.guardar()}" update="formProfesor"/>
+        </p:panel>
+
+        <p:dataTable value="#{profesorUI.listaProfesores}" var="p" style="margin-top:20px">
+            <p:column headerText="ID"><h:outputText value="#{p.id}"/></p:column>
+            <p:column headerText="Nombre"><h:outputText value="#{p.nombre}"/></p:column>
+            <p:column headerText="Apellidos"><h:outputText value="#{p.apellidoPaterno} #{p.apellidoMaterno}"/></p:column>
+            <p:column headerText="RFC"><h:outputText value="#{p.rfc}"/></p:column>
+        </p:dataTable>
+    </h:form>
+</h:body>
+</html>
