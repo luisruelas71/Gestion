@@ -3,60 +3,61 @@ package mx.desarrollo.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import java.io.Serializable;
 
 @Entity
-@Table(name = "usuario")
-public class Usuario {
+@Table(name = "usuarios")
+public class Usuario implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idusuario", nullable = false)
-    private java.lang.Integer id;
+    @Column(name = "id_usuario", nullable = false)
+    private Integer id;
 
-    @Size(max = 45)
+    @Size(max = 50)
     @NotNull
-    @Column(name = "correo", nullable = false, length = 45)
-    private java.lang.String correo;
+    @Column(name = "username", nullable = false, length = 50)
+    private String username;
 
-    @Size(max = 45)
+    @Size(max = 255)
     @NotNull
-    @Column(name = "contrasena", nullable = false, length = 45)
-    private java.lang.String contrasena;
+    @Column(name = "password", nullable = false, length = 255)
+    private String password;
 
+    @Size(max = 20)
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "idAlumno", nullable = false)
-    private Alumno idAlumno;
+    @Column(name = "rol", nullable = false, length = 20)
+    private String rol = "ADMIN";
 
-    public java.lang.Integer getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(java.lang.Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public java.lang.String getCorreo() {
-        return correo;
+    public String getUsername() {
+        return username;
     }
 
-    public void setCorreo(java.lang.String correo) {
-        this.correo = correo;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public java.lang.String getContrasena() {
-        return contrasena;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContrasena(java.lang.String contrasena) {
-        this.contrasena = contrasena;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Alumno getIdAlumno() {
-        return idAlumno;
+    public String getRol() {
+        return rol;
     }
 
-    public void setIdAlumno(Alumno idAlumno) {
-        this.idAlumno = idAlumno;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
-
 }
